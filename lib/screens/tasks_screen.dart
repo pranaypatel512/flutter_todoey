@@ -20,8 +20,8 @@ class _TasksScreenState extends State<TasksScreen> {
       ),
       body: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
         Container(
-          padding:
-              const EdgeInsets.only(top: 60.0, left: 30.0, right: 30.0, bottom: 30.0),
+          padding: const EdgeInsets.only(
+              top: 60.0, left: 30.0, right: 30.0, bottom: 30.0),
           child: const Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -56,6 +56,7 @@ class _TasksScreenState extends State<TasksScreen> {
               borderRadius: const BorderRadius.only(
                   topLeft: Radius.circular(10),
                   topRight: Radius.circular(10.0))),
+          child: TasksListWidget(),
         ))
       ]),
       floatingActionButton: FloatingActionButton(
@@ -64,6 +65,38 @@ class _TasksScreenState extends State<TasksScreen> {
         child: const Icon(
           Icons.add,
         ),
+      ),
+    );
+  }
+}
+
+class TasksListWidget extends StatelessWidget {
+  const TasksListWidget({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return ListView(
+      children: [
+        TasksListItem(
+          text: 'This is title',
+        )
+      ],
+    );
+  }
+}
+
+class TasksListItem extends StatelessWidget {
+  TasksListItem({required this.text});
+  String text;
+  @override
+  Widget build(BuildContext context) {
+    return ListTile(
+      title: Text(text),
+      trailing: Checkbox(
+        value: false,
+        onChanged: (value) {},
       ),
     );
   }
