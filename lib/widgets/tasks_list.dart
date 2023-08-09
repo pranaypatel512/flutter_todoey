@@ -12,6 +12,12 @@ class TasksListWidget extends StatelessWidget {
       children: [
         TasksListItem(
           text: 'This is title',
+        ),
+        TasksListItem(
+          text: 'This is title',
+        ),
+        TasksListItem(
+          text: 'This is title',
         )
       ],
     );
