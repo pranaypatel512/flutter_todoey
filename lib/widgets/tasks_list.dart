@@ -18,8 +18,8 @@ class _TasksListWidgetState extends State<TasksListWidget> {
         return ListView.builder(
           itemBuilder: (context, index) {
             return TasksListItem(
-              taskTitle: value.tasksList[index].name ?? "",
-              isChecked: value.tasksList[index].isDone,
+              taskTitle: value.getList[index].name ?? "",
+              isChecked: value.getList[index].isDone,
               toggleCheckboxState: (p0) {
                 setState(() {
                   value.taskDone(index);
