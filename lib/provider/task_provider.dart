@@ -32,4 +32,6 @@ class TasksProvider extends ChangeNotifier {
   int get taskCount {
     return _tasksList.length;
   }
+
+  
 }

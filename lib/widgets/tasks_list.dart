@@ -25,6 +25,9 @@ class _TasksListWidgetState extends State<TasksListWidget> {
                   value.taskDone(index);
                 });
               },
+              deleteCallback: () {
+                value.deleteTask(index);
+              },
             );
           },
           itemCount: value.taskCount,
