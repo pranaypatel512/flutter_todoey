@@ -4,22 +4,17 @@ import 'package:flutter_todoey/screens/add_tasks_screen.dart';
 import 'package:flutter_todoey/widgets/tasks_list.dart';
 
 class TasksScreen extends StatefulWidget {
-  List<Task> tasksList = [
-    Task(name: 'Buy Cloths'),
-    Task(name: 'Buy Milk'),
-    Task(name: 'Buy Veg')
-  ];
-
   TasksScreen({super.key});
   @override
   State<TasksScreen> createState() => _TasksScreenState();
 }
 
 class _TasksScreenState extends State<TasksScreen> {
-  Widget buildBottomSheetContent(BuildContext context) {
-    return Container();
-  }
-
+  List<Task> tasksList = [
+    Task(name: 'Buy Cloths'),
+    Task(name: 'Buy Milk'),
+    Task(name: 'Buy Veg')
+  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,7 +31,7 @@ class _TasksScreenState extends State<TasksScreen> {
         Container(
           padding: const EdgeInsets.only(
               top: 60.0, left: 30.0, right: 30.0, bottom: 30.0),
-          child: const Column(
+          child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               CircleAvatar(
@@ -54,7 +49,7 @@ class _TasksScreenState extends State<TasksScreen> {
                 style: TextStyle(fontSize: 50.0, fontWeight: FontWeight.w700),
               ),
               Text(
-                '12 Tasks',
+                '${tasksList.length} Tasks',
                 style: TextStyle(fontSize: 14.0),
               ),
               SizedBox(
@@ -70,7 +65,7 @@ class _TasksScreenState extends State<TasksScreen> {
               borderRadius: const BorderRadius.only(
                   topLeft: Radius.circular(10),
                   topRight: Radius.circular(10.0))),
-          child: TasksListWidget(tasksList:widget.tasksList),
+          child: TasksListWidget(tasksList: tasksList),
         ))
       ]),
       floatingActionButton: FloatingActionButton(
@@ -83,7 +78,14 @@ class _TasksScreenState extends State<TasksScreen> {
                   child: Container(
                       padding: EdgeInsets.only(
                           bottom: MediaQuery.of(context).viewInsets.bottom),
-                      child: AddTaskScreen())));
+                      child: AddTaskScreen(
+                        newTaskCallback: (p0) {
+                          setState(() {
+                            tasksList.add(Task(name: p0));
+                          });
+                          Navigator.pop(context);
+                        },
+                      ))));
         },
         child: const Icon(
           Icons.add,
