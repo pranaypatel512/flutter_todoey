@@ -23,7 +23,11 @@ class TasksProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  List<Task> getList(){
+  List<Task> getList() {
     return tasksList;
+  }
+
+  int get taskCount {
+    return tasksList.length;
   }
 }

@@ -14,7 +14,6 @@ class TasksScreen extends StatefulWidget {
 class _TasksScreenState extends State<TasksScreen> {
   @override
   Widget build(BuildContext context) {
-    List<Task> tasks = Provider.of<TasksProvider>(context).getList();
     return Scaffold(
       appBar: AppBar(
         // TRY THIS: Try changing the color here to a specific color (to
@@ -46,9 +45,13 @@ class _TasksScreenState extends State<TasksScreen> {
                 'Todoey',
                 style: TextStyle(fontSize: 50.0, fontWeight: FontWeight.w700),
               ),
-              Text(
-                '${tasks.length} Tasks',
-                style: TextStyle(fontSize: 14.0),
+              Consumer<TasksProvider>(
+                builder: (context, value, child) {
+                  return Text(
+                    '${value.taskCount} Tasks',
+                    style: TextStyle(fontSize: 14.0),
+                  );
+                },
               ),
               SizedBox(
                 height: 10.0,
@@ -63,7 +66,7 @@ class _TasksScreenState extends State<TasksScreen> {
               borderRadius: const BorderRadius.only(
                   topLeft: Radius.circular(10),
                   topRight: Radius.circular(10.0))),
-          child: TasksListWidget(tasksList: tasks),
+          child: TasksListWidget(),
         ))
       ]),
       floatingActionButton: FloatingActionButton(
