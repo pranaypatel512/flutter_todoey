@@ -1,8 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_todoey/model/task.dart';
 import 'package:flutter_todoey/screens/add_tasks_screen.dart';
 import 'package:flutter_todoey/widgets/tasks_list.dart';
 
 class TasksScreen extends StatefulWidget {
+  List<Task> tasksList = [
+    Task(name: 'Buy Cloths'),
+    Task(name: 'Buy Milk'),
+    Task(name: 'Buy Veg')
+  ];
+
+  TasksScreen({super.key});
   @override
   State<TasksScreen> createState() => _TasksScreenState();
 }
@@ -62,7 +70,7 @@ class _TasksScreenState extends State<TasksScreen> {
               borderRadius: const BorderRadius.only(
                   topLeft: Radius.circular(10),
                   topRight: Radius.circular(10.0))),
-          child: TasksListWidget(),
+          child: TasksListWidget(tasksList:widget.tasksList),
         ))
       ]),
       floatingActionButton: FloatingActionButton(
