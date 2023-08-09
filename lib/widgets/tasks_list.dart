@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_todoey/model/task.dart';
+import 'package:flutter_todoey/provider/task_provider.dart';
 import 'package:flutter_todoey/widgets/task_list_item.dart';
+import 'package:provider/provider.dart';
 
 class TasksListWidget extends StatefulWidget {
   TasksListWidget({super.key, required this.tasksList});
@@ -20,7 +22,7 @@ class _TasksListWidgetState extends State<TasksListWidget> {
           isChecked: widget.tasksList[index].isDone,
           toggleCheckboxState: (p0) {
             setState(() {
-              widget.tasksList[index].toggleDone();
+              Provider.of<TasksProvider>(context,listen: false).taskDone(index);
             });
           },
         );

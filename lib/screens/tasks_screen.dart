@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_todoey/model/task.dart';
+import 'package:flutter_todoey/provider/task_provider.dart';
 import 'package:flutter_todoey/screens/add_tasks_screen.dart';
 import 'package:flutter_todoey/widgets/tasks_list.dart';
+import 'package:provider/provider.dart';
 
 class TasksScreen extends StatefulWidget {
   TasksScreen({super.key});
@@ -10,13 +12,9 @@ class TasksScreen extends StatefulWidget {
 }
 
 class _TasksScreenState extends State<TasksScreen> {
-  List<Task> tasksList = [
-    Task(name: 'Buy Cloths'),
-    Task(name: 'Buy Milk'),
-    Task(name: 'Buy Veg')
-  ];
   @override
   Widget build(BuildContext context) {
+    List<Task> tasks = Provider.of<TasksProvider>(context).getList();
     return Scaffold(
       appBar: AppBar(
         // TRY THIS: Try changing the color here to a specific color (to
@@ -49,7 +47,7 @@ class _TasksScreenState extends State<TasksScreen> {
                 style: TextStyle(fontSize: 50.0, fontWeight: FontWeight.w700),
               ),
               Text(
-                '${tasksList.length} Tasks',
+                '${tasks.length} Tasks',
                 style: TextStyle(fontSize: 14.0),
               ),
               SizedBox(
@@ -65,7 +63,7 @@ class _TasksScreenState extends State<TasksScreen> {
               borderRadius: const BorderRadius.only(
                   topLeft: Radius.circular(10),
                   topRight: Radius.circular(10.0))),
-          child: TasksListWidget(tasksList: tasksList),
+          child: TasksListWidget(tasksList: tasks),
         ))
       ]),
       floatingActionButton: FloatingActionButton(
@@ -80,9 +78,9 @@ class _TasksScreenState extends State<TasksScreen> {
                           bottom: MediaQuery.of(context).viewInsets.bottom),
                       child: AddTaskScreen(
                         newTaskCallback: (p0) {
-                          setState(() {
-                            tasksList.add(Task(name: p0));
-                          });
+                          Provider.of<TasksProvider>(context, listen: false)
+                              .addTask(p0);
+
                           Navigator.pop(context);
                         },
                       ))));
